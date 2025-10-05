@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+sqlalchemy = "*"
+psycopg2-binary = "*"
+pydantic = "*"
+python-dotenv = "*"
+passlib = {extras = ["bcrypt"], version = "*"}
+pyjwt = "*"
+psycopg = {extras = ["binary"], version = "*"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"
+python_full_version = "3.13.5"
+
+[scripts]
+start = "python -X utf8 -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload"

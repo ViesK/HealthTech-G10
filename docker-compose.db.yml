@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    container_name: healthtech-db
+    environment:
+      POSTGRES_USER: salud
+      POSTGRES_PASSWORD: salud
+      POSTGRES_DB: salud
+    ports:
+      - "5433:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+volumes:
+  dbdata:
