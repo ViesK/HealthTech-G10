@@ -1,5 +1,5 @@
 const Register = () => {
-    return <div className="bg-red-800">registro</div>;
+    return <div className="">registro</div>;
 };
 
 export default Register;
