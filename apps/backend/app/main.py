@@ -1,17 +1,18 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .core.config import API_PREFIX
+from app.core.config import API_PREFIX, CORS_ORIGINS
 
-app = FastAPI(title="Health API")
+app = FastAPI(title="HealthTech API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get(f"{API_PREFIX}/health")
-def health():
-    return {"message": "ok"}
+from .modules import ROUTERS
+for r in ROUTERS:
+    app.include_router(r, prefix=API_PREFIX)
+
