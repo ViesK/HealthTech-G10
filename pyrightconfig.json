@@ -1,0 +1,4 @@
+{
+  "include": ["apps/backend/app"],
+  "extraPaths": ["apps/backend"]
+}
