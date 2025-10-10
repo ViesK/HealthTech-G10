@@ -2,7 +2,7 @@
 
 ## Requisitos
 - Node.js 20+
-- Python 3.13 + Pipenv
+- Python 3.13.5 + Pipenv
 - PostgreSQL 16+ (con pgAdmin o psql)
 
 ## Primera vez (tras clonar)
