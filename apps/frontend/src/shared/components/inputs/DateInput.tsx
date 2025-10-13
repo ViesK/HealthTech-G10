@@ -34,6 +34,9 @@ export const DateInput: React.FC<DateInputProps> = ({ label = 'Fecha de nacimien
                     placeholderText="1985-06-10"
                     minDate={min ? new Date(min) : undefined}
                     maxDate={max ? new Date(max) : new Date()} // no fechas futuras si no se pasa max
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select" // hace que los menús sean desplegables
                     required={required}
                     disabled={disabled}
                     wrapperClassName="w-full"
