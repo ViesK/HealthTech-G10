@@ -8,6 +8,7 @@ from .notifications.router import router as notifications_router
 from .service_slots.router import router as service_slots_router
 from .specialties.router import router as specialties_router
 from .users.router import router as users_router
+from .users.router import router_medic as medics_routers
 
 ROUTERS = [
     appointments_router,
@@ -20,6 +21,7 @@ ROUTERS = [
     service_slots_router,
     specialties_router,
     users_router,
+    medics_routers,
 ]
 
 __all__ = [
@@ -27,5 +29,5 @@ __all__ = [
     "appointments_router", "clinic_router", "clinic_specialties_router",
     "locations_router", "medic_schedules_router", "medic_specialties_router",
     "notifications_router", "service_slots_router", "specialties_router",
-    "users_router",
+    "users_router","medics_routers",
 ]
