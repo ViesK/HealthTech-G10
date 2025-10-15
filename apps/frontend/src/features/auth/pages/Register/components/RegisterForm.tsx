@@ -1,5 +1,4 @@
-import { DateInput, SelectInput } from '@/shared/components';
-import { Button } from '@/shared/components/buttons/Button';
+import { Button, DateInput, SelectInput } from '@/shared/components';
 import { LOCALITY_OPTIONS } from '@/shared/constants';
 import { useState } from 'react';
 
@@ -35,9 +34,7 @@ const RegisterForm = () => {
                 <label htmlFor=""></label>
                 <input type="password" placeholder="Confirmar contraseña" className="w-full border border-gray-300 rounded-sm p-1 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500" />
 
-                {/* <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-3 rounded-sm hover:bg-blue-700 transition-colors">
-                    Crear cuenta
-                </button> */}
+                <Button label="Continuar" variant="primary" />
             </form>
         </main>
     );
