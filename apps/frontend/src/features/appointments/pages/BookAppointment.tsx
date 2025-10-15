@@ -4,7 +4,7 @@ const BookAppointment = () => {
     return (
         <div className="min-h-screen flex flex-col items-center">
             <div className="w-full max-w-sm">
-                <Header title={'Registrarse'} onBack={() => window.history.back()} />
+                <Header title={'Reservar Cita'} onBack={() => window.history.back()} />
             </div>
         </div>
     );
