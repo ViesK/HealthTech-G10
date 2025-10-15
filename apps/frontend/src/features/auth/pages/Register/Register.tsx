@@ -1,12 +1,11 @@
+import Header from '@/shared/components/headers/Header';
 import RegisterForm from './components/RegisterForm';
-import RegisterHeader from './components/RegisterHeader';
 
 const Register = () => {
     return (
         <div className="min-h-screen flex flex-col items-center">
-            {/* Contenedor común para header y form */}
             <div className="w-full max-w-sm">
-                <RegisterHeader />
+                <Header title={'Registrarse'} onBack={() => window.history.back()} />
 
                 <RegisterForm />
             </div>
