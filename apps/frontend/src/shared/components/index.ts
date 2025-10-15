@@ -1,3 +1,3 @@
 export * from './inputs';
-export * from './header';
+export * from './headers';
 export * from './buttons';
