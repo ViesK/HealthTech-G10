@@ -1,4 +1,5 @@
 export * from './inputs';
 export * from './headers';
 export * from './buttons';
-export * from './layout';
+export * from './layouts';
+export * from './toggles';
