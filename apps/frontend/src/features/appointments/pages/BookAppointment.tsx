@@ -1,12 +1,28 @@
-import Header from '@/shared/components/headers/Header';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import AppLayout from '@/shared/components/layouts/AppLayout';
+import AdvancedSearch from '../components/AdvancedSearch';
+import SwitchToggle from '@/shared/components/toggles/SwitchToggle';
 
 const BookAppointment = () => {
+    const [showAdvanced, setShowAdvanced] = useState(false);
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        console.log('Volver atrás');
+        navigate(-1);
+    };
+
     return (
-        <main className="min-h-screen flex flex-col items-center">
-            <div className="w-full max-w-sm">
-                <Header title={'Reservar Cita'} onBack={() => window.history.back()} />
-            </div>
-        </main>
+        <AppLayout title="Reservar Cita" onBack={handleBack}>
+            <SwitchToggle label="Búsqueda avanzada (opcional)" initialValue={showAdvanced} onChange={setShowAdvanced} />
+
+            {showAdvanced && (
+                <div className="mt-4">
+                    <AdvancedSearch />
+                </div>
+            )}
+        </AppLayout>
     );
 };
 
