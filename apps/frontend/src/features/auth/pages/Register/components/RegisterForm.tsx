@@ -7,7 +7,7 @@ const RegisterForm = () => {
     const [locality, setLocality] = useState('');
 
     return (
-        <main className="p-6">
+        <main className="py-6">
             <form className="flex flex-col gap-4">
                 <label htmlFor=""></label>
                 <input type="text" placeholder="Nombre" className="w-full border border-gray-300 rounded-sm p-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
