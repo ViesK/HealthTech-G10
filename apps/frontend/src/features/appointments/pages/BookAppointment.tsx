@@ -1,26 +1,32 @@
-import Layout from '@/shared/components/layout/Layout';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import AppLayout from '@/shared/components/layout/AppLayout';
 import AdvancedSearch from '../components/AdvancedSearch';
-// import { useNavigate } from 'react-router-dom';
-// import AdvancedSearch from '../components/AdvancedSearch';
-// import Header from '@/shared/components/headers/Header';
-
-// const navigate = useNavigate();
 
 const BookAppointment = () => {
+    const [showAdvanced, setShowAdvanced] = useState(false);
+    const navigate = useNavigate();
+
     const handleBack = () => {
         console.log('Volver atrás');
-        // navigate(-1);
+        navigate(-1);
     };
 
     return (
-        // <main className="min-h-screen flex flex-col items-center">
-        //     <div className="w-full max-w-sm">
-        //         <Header title={'Reservar Cita'} onBack={() => window.history.back()} />
-        //     </div>
-        // </main>
-        <Layout title="Reservar Cita" onBack={handleBack}>
+        <AppLayout title="Reservar Cita" onBack={handleBack}>
+            <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">Búsqueda avanzada (opcional)</span>
+                <input type="checkbox" checked={showAdvanced} onChange={() => setShowAdvanced(!showAdvanced)} className="toggle toggle-primary" />
+            </div>
+
+            {/* Solo mostrar si showAdvanced es true */}
+            {/* {showAdvanced && (
+                <div className="mt-4">
+                    <AdvancedSearch />
+                </div>
+            )} */}
             <AdvancedSearch />
-        </Layout>
+        </AppLayout>
     );
 };
 
