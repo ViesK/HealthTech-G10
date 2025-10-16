@@ -7,16 +7,16 @@ interface LayoutProps {
     children: ReactElement | ReactNode;
 }
 
-const Layout = ({ title, onBack, children }: LayoutProps) => {
+const AppLayout = ({ title, onBack, children }: LayoutProps) => {
     return (
         <div className="min-h-screen flex flex-col items-center">
             <Header title={title} onBack={onBack} />
 
-            <main className="flex-1 p-6">{children}</main>
+            <main className="min-h-screen flex flex-col items-center">{children}</main>
 
             {/* Navbar (la agregaremos luego) */}
         </div>
     );
 };
 
-export default Layout;
+export default AppLayout;

@@ -1,5 +1,5 @@
 const AdvancedSearch = () => {
-    return <div></div>;
+    return <div>HOLA</div>;
 };
 
 export default AdvancedSearch;
