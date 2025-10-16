@@ -17,13 +17,11 @@ const BookAppointment = () => {
         <AppLayout title="Reservar Cita" onBack={handleBack}>
             <SwitchToggle label="Búsqueda avanzada (opcional)" initialValue={showAdvanced} onChange={setShowAdvanced} />
 
-            {/* Solo mostrar si showAdvanced es true */}
-            {/* {showAdvanced && (
+            {showAdvanced && (
                 <div className="mt-4">
                     <AdvancedSearch />
                 </div>
-            )} */}
-            <AdvancedSearch />
+            )}
         </AppLayout>
     );
 };
