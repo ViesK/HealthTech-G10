@@ -23,19 +23,19 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
   helperText,
   onChange,
 }) => {
-  // Estado para mostrar u ocultar la contraseña
+
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="relative w-full">
-      {/* Etiqueta */}
+      
       {label && (
         <label htmlFor={id} className="text-sm font-medium text-gray-700">
           {label}
         </label>
       )}
 
-      {/* Input + botón Mostrar/Ocultar */}
+    
       <div className="relative">
         <input
           id={id}
@@ -51,7 +51,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
           } transition-colors duration-200 ease-in-out`}
         />
 
-        {/* Botón Mostrar/Ocultar */}
+        
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
@@ -62,7 +62,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
         </button>
       </div>
 
-      {/* Texto de ayuda */}
+      
       {helperText && <p className="text-xs text-gray-500 mt-1">{helperText}</p>}
     </div>
   );
