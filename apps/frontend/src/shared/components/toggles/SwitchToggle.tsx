@@ -21,7 +21,7 @@ const SwitchToggle = ({ label, initialValue = false, onChange, disabled = false 
 
     return (
         <div className="flex items-center justify-between w-full max-w-sm select-none">
-            {label && <span className="text-sm font-medium text-gray-700">{label}</span>}
+            {label && <span className="text-sm font-light text-gray-800">{label}</span>}
 
             <button
                 type="button"
