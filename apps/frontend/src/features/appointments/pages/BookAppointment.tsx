@@ -15,7 +15,11 @@ const BookAppointment = () => {
 
     return (
         <AppLayout title="Reservar Cita" onBack={handleBack}>
-            <SwitchToggle label="Búsqueda avanzada (opcional)" initialValue={showAdvanced} onChange={setShowAdvanced} />
+            <div className="flex items-center">
+                <p className="text-sm font-medium text-gray-700">Busqueda Avanzada</p>
+
+                <SwitchToggle label="(opcional)" initialValue={showAdvanced} onChange={setShowAdvanced} />
+            </div>
 
             {showAdvanced && (
                 <div className="mt-4">
