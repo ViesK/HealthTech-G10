@@ -10,14 +10,17 @@ const DaysOfPreference = () => {
 
     return (
         <div className="flex flex-col gap-2">
-            <span className="text-sm font-medium">Días de preferencia</span>
-            <div className="flex gap-2 flex-wrap">
+            <span className="text-sm font-medium text-gray-800">Días de preferencia</span>
+
+            <div className="flex flex-wrap gap-2">
                 {DAYS_OF_PREFERENCE.map((day) => (
                     <button
                         key={day}
                         onClick={() => toggleDay(day)}
-                        className={`px-3 py-1 rounded-lg border text-sm transition-all duration-200 ${
-                            selectedDays.includes(day) ? 'bg-blue-100 border-blue-500 text-blue-600' : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                        className={`w-9 h-9 rounded-xl border text-sm font-medium transition-all hover:cursor-pointer duration-200 shadow-sm ${
+                            selectedDays.includes(day)
+                                ? 'bg-blue-50 border-blue-200 text-blue-800 shadow-[0_0_6px_rgba(37,99,235,0.2)]'
+                                : 'border-blue-100 text-blue-500 hover:bg-blue-50 hover:border-blue-300'
                         }`}>
                         {day}
                     </button>

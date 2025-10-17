@@ -16,8 +16,10 @@ const TimeBand = () => {
                     <button
                         key={time.label}
                         onClick={() => toggleTime(time.label)}
-                        className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 border rounded-lg text-sm transition-all duration-200 ${
-                            selectedTime === time.label ? 'bg-blue-100 border-blue-500 text-blue-600' : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                        className={`flex-1 flex items-center justify-center gap-2 px-4 py-1 border rounded-full text-sm hover:cursor-pointer transition-all duration-200 ${
+                            selectedTime === time.label
+                                ? 'bg-blue-50 border-blue-200 text-blue-800 shadow-[0_0_6px_rgba(37,99,235,0.2)]'
+                                : 'border-blue-100 text-blue-500 hover:bg-blue-50 hover:border-blue-300'
                         }`}>
                         <span>{time.icon}</span>
                         {time.label}
