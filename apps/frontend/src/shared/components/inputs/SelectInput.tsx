@@ -34,7 +34,7 @@ export const SelectInput: React.FC<SelectInputProps> = ({ label = 'Selecciona un
                 onChange={(e) => onChange?.(e.target.value)}
                 required={required}
                 disabled={disabled}
-                className={`w-full border appearance-none border-gray-300 rounded-sm pl-3 p-1 text-sm text-gray-900 focus:outline-none focus:border-black focus:border[1px] ${
+                className={`w-full border appearance-none border-gray-300 rounded-sm pl-3 p-1 text-sm text-gray-900 hover:cursor-pointer focus:outline-none focus:border-black focus:border[1px] ${
                     disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'
                 } transition-colors duration-200 ease-in-out`}>
                 <option value="" className="text-gray-400" disabled>
@@ -47,7 +47,6 @@ export const SelectInput: React.FC<SelectInputProps> = ({ label = 'Selecciona un
                 ))}
             </select>
 
-            {/* Flecha SVG personalizada */}
             <p className="absolute right-3 top-7.5 text-sm w-4 h-4 text-gray-500 pointer-events-none"> ▽ </p>
 
             {helperText && <p className="text-xs text-gray-500 mt-1">{helperText}</p>}
