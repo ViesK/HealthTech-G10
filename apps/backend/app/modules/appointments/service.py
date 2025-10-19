@@ -46,11 +46,11 @@ def read_appointment(db: Session, appt_id: int) -> AppointmentModel:
 def update_appointment(db: Session, appt_id: int, payload: AppointmentUpdate) -> AppointmentModel:
     appt = _get_or_404(db, appt_id)
     
-    data = payload.model_dump(exclude_unset=True)
+    appointment_data = payload.model_dump(exclude_unset=True)
 
-    new_start = data.get("start_ts", appt.start_ts)
-    new_end   = data.get("end_ts", appt.end_ts)
-    new_slot  = data.get("service_slot_id", appt.service_slot_id)
+    new_start = appointment_data.get("start_ts", appt.start_ts)
+    new_end   = appointment_data.get("end_ts", appt.end_ts)
+    new_slot  = appointment_data.get("service_slot_id", appt.service_slot_id)
 
     _validate_time_window(new_start, new_end)
     
@@ -67,7 +67,7 @@ def update_appointment(db: Session, appt_id: int, payload: AppointmentUpdate) ->
     if overlap is not None:
         raise SlotAlreadyBooked("Ya existe una cita en esa fecha y hora")
     
-    for k, v in data.items():
+    for k, v in appointment_data.items():
         setattr(appt, k, v)
 
     db.commit()
