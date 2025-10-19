@@ -3,8 +3,13 @@ from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
 import jwt
 from .config import JWT_SECRET
-
+from fastapi import HTTPException, status, Depends
+from fastapi.security import OAuth2PasswordBearer
 _ALG = "HS256"
+
+# Endpoint de login para obtener el token
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/login")
+
 _pwd = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(plain: str) -> str:
@@ -20,3 +25,21 @@ def create_access_token(sub: str, minutes: int = 60) -> str:
 
 def decode_token(token: str) -> dict:
     return jwt.decode(token, JWT_SECRET, algorithms=[_ALG])
+
+# --- DEPENDENCIAS PARA RUTAS ---
+def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
+    """Devuelve la información del usuario autenticado desde el token."""
+    payload = decode_token(token)
+    return payload
+
+def require_role(role: str):
+    #Permite acceso solo a usuarios con cierto tipo (admin, medico, paciente).
+
+    def role_checker(payload: dict = Depends(get_current_user)):
+        if payload.get("type") != role:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Solo los usuarios con rol '{role}' pueden acceder a esta ruta."
+            )
+        return payload
+    return role_checker
