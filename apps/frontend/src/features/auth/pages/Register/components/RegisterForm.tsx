@@ -1,4 +1,4 @@
-import { Button, DateInput, SelectInput } from '@/shared/components';
+import { Button, DateInput, EmailInput, InputField, NumberInput, PasswordInput, SelectInput } from '@/shared/components';
 import { LOCALITY_OPTIONS } from '@/shared/constants';
 import { useState } from 'react';
 
@@ -9,30 +9,23 @@ const RegisterForm = () => {
     return (
         <main className="py-6">
             <form className="flex flex-col gap-4">
-                <label htmlFor=""></label>
-                <input type="text" placeholder="Nombre" className="w-full border border-gray-300 rounded-sm p-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <InputField label="Nombre" id="firstName" type="text" name="firstName" placeholder="Nombre" />
 
-                <label htmlFor=""></label>
-                <input type="text" placeholder="Apellido" className="w-full border border-gray-300 rounded-sm p-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <InputField label="Apellido" id="lastName" type="text" name="lastName" placeholder="Apellido" />
 
                 <DateInput label="Fecha de nacimiento" id="birthdate" name="birthdate" value={birthDate} onChange={(dateString) => setBirthDate(dateString)} required />
 
-                <label htmlFor=""></label>
-                <input type="email" placeholder="Correo electrónico" className="w-full border border-gray-300 rounded-sm p-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <EmailInput label="Correo electrónico" id="email" name="email" placeholder="Correo electrónico" />
 
                 <SelectInput label="Localidad" id="gender" name="gender" value={locality} onChange={setLocality} options={LOCALITY_OPTIONS} required />
 
-                <label htmlFor=""></label>
-                <input type="text" placeholder="Domicilio" className="w-full border border-gray-300 rounded-sm p-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <InputField label="Domicilio" id="address" type="text" name="address" placeholder="Domicilio" />
 
-                <label htmlFor=""></label>
-                <input type="number" placeholder="Telefono" className="w-full border border-gray-300 rounded-sm p-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <NumberInput label="Teléfono" id="phone" name="phone" placeholder="Teléfono" />
 
-                <label htmlFor=""></label>
-                <input type="password" placeholder="Contraseña" className="w-full border border-gray-300 rounded-sm p-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <PasswordInput label="Contraseña" id="password" name="password" placeholder="Contraseña" />
 
-                <label htmlFor=""></label>
-                <input type="password" placeholder="Confirmar contraseña" className="w-full border border-gray-300 rounded-sm p-1 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <PasswordInput label="Confirmar contraseña" id="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" />
 
                 <Button label="Continuar" variant="primary" />
             </form>

@@ -44,7 +44,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         required={required}
         disabled={disabled}
         onChange={onChange}
-        className={`w-full border border-gray-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-black ${
+        className={`w-full border border-gray-300 rounded-sm px-3 py-1 text-sm focus:outline-none focus:border-black ${
           disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'
         } transition-colors duration-200 ease-in-out`}
       />
