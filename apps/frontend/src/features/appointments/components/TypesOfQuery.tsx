@@ -7,7 +7,7 @@ const TypesOfQuery = () => {
         <div className="flex flex-col gap-2">
             <span className="text-sm font-medium text-gray-800">Tipo de consulta</span>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-wrap">
                 {['Presencial', 'Videoconsulta'].map((type) => (
                     <button
                         key={type}
