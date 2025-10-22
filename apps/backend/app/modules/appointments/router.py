@@ -6,8 +6,9 @@ from app.core.db import get_db
 from app.modules.appointments.model import Appointment
 from app.modules.appointments.schema import AppointmentCreate, AppointmentRead, AppointmentUpdate
 from app.modules.appointments import service
+from app.core.security import get_current_user, require_role
 
-router = APIRouter(prefix="/appointments", tags=["appointments"])
+router = APIRouter(prefix="/appointments", tags=["appointments"], dependencies=[Depends(require_role("medico", "paciente"))])
 
 @router.post("",response_model=AppointmentRead, status_code=status.HTTP_201_CREATED)
 def create_appointment(payload: AppointmentCreate, db: Session=Depends(get_db)):

@@ -5,6 +5,7 @@ import jwt
 from .config import JWT_SECRET
 from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
+from typing import Callable
 _ALG = "HS256"
 
 # Endpoint de login para obtener el token
@@ -18,9 +19,9 @@ def hash_password(plain: str) -> str:
 def verify_password(plain: str, hashed: str) -> bool:
     return _pwd.verify(plain, hashed)
 
-def create_access_token(sub: str, minutes: int = 60) -> str:
+def create_access_token(sub: str, minutes: int = 60, **claims) -> str:
     now = datetime.now(timezone.utc)
-    payload = {"sub": sub, "iat": int(now.timestamp()), "exp": int((now + timedelta(minutes=minutes)).timestamp())}
+    payload = {"sub": sub, "iat": int(now.timestamp()), "exp": int((now + timedelta(minutes=minutes)).timestamp()),**claims}
     return jwt.encode(payload, JWT_SECRET, algorithm=_ALG)
 
 def decode_token(token: str) -> dict:
@@ -32,14 +33,16 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
     payload = decode_token(token)
     return payload
 
-def require_role(role: str):
-    #Permite acceso solo a usuarios con cierto tipo (admin, medico, paciente).
+def require_role(*allowed_roles: str) -> Callable:
+
+    allowed = {str(r) for r in allowed_roles}
 
     def role_checker(payload: dict = Depends(get_current_user)):
-        if payload.get("type") != role:
+        user_type = payload.get("type")
+        if user_type not in allowed:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
-                detail=f"Solo los usuarios con rol '{role}' pueden acceder a esta ruta."
+                detail=f"Permisos insuficientes. Requiere uno de: {', '.join(sorted(allowed))}"
             )
         return payload
     return role_checker

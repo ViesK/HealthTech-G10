@@ -10,9 +10,7 @@ class Base(DeclarativeBase):
 class Notification(Base):
     __tablename__ = "notifications"
 
-    __table_args__ = (
-        CheckConstraint("status IN ('PENDING','SENT','FAILED')", name="ck_notifications_status")
-    )
+    __table_args__ = (CheckConstraint("status IN ('PENDING','SENT','FAILED')", name="ck_notifications_status")),
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 

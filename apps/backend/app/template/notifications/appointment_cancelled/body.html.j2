@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+  <body>
+    <h2>Tu cita se ha cancelado</h2>
+    <p><strong>Paciente:</strong> {{ patient_name }}</p>
+    <p><strong>Médico:</strong> {{ medic_name }}</p>
+    <p><strong>Clínica:</strong> {{ clinic_name }}</p>
+    <p><strong>Especialidad:</strong> {{ specialty }}</p>
+    <p><strong>Horario previsto:</strong> {{ start_str }} — {{ end_str }}</p>
+    <p>Puedes gestionar nuevas citas aquí: <a href="{{ manage_url }}">Gestionar</a></p>
+  </body>
+</html>
