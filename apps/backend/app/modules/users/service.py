@@ -91,7 +91,7 @@ def authenticate_user(user_id: int, password: str, db: Session) -> dict:
             detail="Contraseña incorrecta"
         )
 
-    token = create_access_token(sub=str(user.id))
+    token = create_access_token(sub=str(user.id), type=user.type.value)
     return {
         "access_token": token,
         "token_type": "bearer",
