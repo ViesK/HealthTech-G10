@@ -26,10 +26,13 @@ export const InputField: React.FC<InputFieldProps> = ({
   onChange,
 }) => {
   return (
-    <div className="relative w-full">
+    <div className="w-full mb-4">
       {/* Label */}
       {label && (
-        <label htmlFor={id} className="text-sm font-medium text-gray-700">
+        <label
+          htmlFor={id}
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           {label}
         </label>
       )}
@@ -44,9 +47,11 @@ export const InputField: React.FC<InputFieldProps> = ({
         required={required}
         disabled={disabled}
         onChange={onChange}
-        className={`w-full border border-gray-300 rounded-sm px-3 py-1 text-sm focus:outline-none focus:border-black ${
-          disabled ? 'bg-gray-100 cursor-not-allowed' : 'bg-white'
-        } transition-colors duration-200 ease-in-out`}
+        className={`w-full rounded-md border border-gray-300 bg-[#ffffff] px-3 py-2.5 text-sm text-gray-900 placeholder-gray-400 
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+        ${disabled ? 'opacity-70 cursor-not-allowed' : ''} 
+        transition-all duration-200 ease-in-out`}
+        style={{ backgroundColor: '#ffffff' }} // 🔒 Fuerza blanco absoluto
       />
 
       {/* Helper Text */}
@@ -54,4 +59,3 @@ export const InputField: React.FC<InputFieldProps> = ({
     </div>
   );
 };
-
