@@ -20,7 +20,7 @@ const HomePaciente = () => {
     <div className="min-h-screen flex justify-center items-center bg-gray-200">
       <div
         className="
-          relative w-full h-screen bg-gray-50 flex flex-col shadow-2xl overflow-hidden
+          relative w-full h-screen bg-gray-50 flex flex-col overflow-hidden
           sm:max-w-[412px] sm:h-[780px] sm:rounded-2xl
           transition-all duration-500
         "
