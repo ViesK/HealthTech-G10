@@ -1,1 +1,11 @@
 @import 'tailwindcss';
+/* ==== RESETEO GLOBAL ==== */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Evita scroll del navegador */
+  background-color: #e5e7eb; /* Gris igual a bg-gray-200 */
+}

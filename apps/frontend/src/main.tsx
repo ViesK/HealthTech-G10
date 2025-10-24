@@ -7,7 +7,8 @@ import { store } from './app/store/store';
 //import BookAppointment from './features/appointments/pages/BookAppointment';
 import { BrowserRouter } from 'react-router-dom';
 // import Home from './features/home/pages/Home';
-import Login from './features/auth/pages/Login/Login';
+// import Login from './features/auth/pages/Login/Login';
+import HomePaciente from './features/patients/HomePaciente';
 
 // const router = createBrowserRouter([{ path: '/', element: <Home /> }]);
 
@@ -16,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         {/* <RouterProvider router={router} /> */}
         <BrowserRouter>
             {/* <Register /> */}
-            <Login />
+            <HomePaciente/>
         </BrowserRouter>
     </Provider>
 );
