@@ -14,6 +14,7 @@ psycopg = {extras = ["binary"], version = "*"}
 bcrypt = "==4.0.1"
 pyjwt = "*"
 passlib = {extras = ["bcrypt"], version = "*"}
+httpx = "*"
 
 [dev-packages]
 

@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import FastAPI, APIRouter, HTTPException, Depends
+import httpx
 from sqlalchemy.orm import Session
 from typing import List
 from datetime import datetime
@@ -12,6 +13,11 @@ from  .service import *
 from app.core.security import *
 from app.core.db import get_db
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 router = APIRouter(prefix="/users", tags=["users"])
 #router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(get_current_user)])
 
@@ -72,7 +78,41 @@ paciente_router = APIRouter(prefix="/pacientes", tags=["paciente"])
 def medico_dashboard(user=Depends(require_role("medico"))):
     return {"msg": f"Bienvenido doctor {user['sub']}"}
 
+<<<<<<< Updated upstream
 #Para paciente
 @paciente_router.get("/dashboard", response_model=dict)
 def paciente_dashboard(user=Depends(require_role("paciente"))):
     return {"msg": f"Bienvenido paciente {user['sub']}"}
+=======
+#Rutaa protegiida
+
+router_medic = APIRouter(prefix="/medics", tags=["medics"])
+@router_medic.get("/dashboard", response_model=dict)
+def medic_dashboard(user=Depends(require_role("medico"))):
+    return {"msg": f"Bienvenido doctor {user['sub']}"}
+
+#Conexcion FHIR
+
+router_fhir = APIRouter(prefix="/fhir",)
+FHIR_URL = "https://hapi.fhir.org/baseR4"
+
+@router_fhir.get("/paciente") #ID DE PRUEBA 45178131
+async def get_fhir_data(id: int, user=Depends(require_role("medico", "paciente"))):
+    """Busca un paciente por ID en el servidor FHIR externo."""
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(f"{FHIR_URL}/Patient/{id}")
+            response.raise_for_status()
+            data = response.json()  # httpx.AsyncClient permite json() sin await, es síncrono aquí
+            if not data:
+                raise HTTPException(status_code=404, detail="Paciente no encontrado")
+            return data
+        except httpx.HTTPStatusError as e:
+            # Captura errores HTTP como 404, 500, etc
+            if e.response.status_code == 404:
+                raise HTTPException(status_code=404, detail="Paciente no encontrado")
+            raise HTTPException(status_code=500, detail=f"Error al conectar con FHIR: {str(e)}")
+        except httpx.RequestError as e:
+            # Errores de conexión
+            raise HTTPException(status_code=500, detail=f"Error de conexión con FHIR: {str(e)}")
+>>>>>>> Stashed changes

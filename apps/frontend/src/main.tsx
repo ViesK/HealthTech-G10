@@ -7,10 +7,16 @@ import { store } from './app/store/store';
 import BookAppointment from './features/appointments/pages/BookAppointment';
 import { BrowserRouter } from 'react-router-dom';
 // import Home from './features/home/pages/Home';
+<<<<<<< Updated upstream
+=======
+// import Login from './features/auth/pages/Login/Login';
+import HomePaciente from './features/patients/HomePaciente';
+>>>>>>> Stashed changes
 
 // const router = createBrowserRouter([{ path: '/', element: <Home /> }]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
+<<<<<<< Updated upstream
     import { useState } from "react";
     import axios from "axios";
     
@@ -62,4 +68,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </div>
       );
     }
+=======
+    <Provider store={store}>
+        {/* <RouterProvider router={router} /> */}
+        <BrowserRouter>
+
+            <HomePaciente />
+        </BrowserRouter>
+    </Provider>
+>>>>>>> Stashed changes
 );
