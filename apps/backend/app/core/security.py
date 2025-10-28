@@ -8,6 +8,7 @@ from fastapi.security import OAuth2PasswordBearer
 from typing import Callable
 _ALG = "HS256"
 
+
 # Endpoint de login para obtener el token
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/login")
 
