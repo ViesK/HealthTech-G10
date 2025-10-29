@@ -13,11 +13,7 @@ from  .service import *
 from app.core.security import *
 from app.core.db import get_db
 
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
 router = APIRouter(prefix="/users", tags=["users"])
 #router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(get_current_user)])
 
@@ -78,12 +74,12 @@ paciente_router = APIRouter(prefix="/pacientes", tags=["paciente"])
 def medico_dashboard(user=Depends(require_role("medico"))):
     return {"msg": f"Bienvenido doctor {user['sub']}"}
 
-<<<<<<< Updated upstream
+
 #Para paciente
 @paciente_router.get("/dashboard", response_model=dict)
 def paciente_dashboard(user=Depends(require_role("paciente"))):
     return {"msg": f"Bienvenido paciente {user['sub']}"}
-=======
+
 #Rutaa protegiida
 
 router_medic = APIRouter(prefix="/medics", tags=["medics"])
@@ -115,4 +111,4 @@ async def get_fhir_data(id: int, user=Depends(require_role("medico", "paciente")
         except httpx.RequestError as e:
             # Errores de conexión
             raise HTTPException(status_code=500, detail=f"Error de conexión con FHIR: {str(e)}")
->>>>>>> Stashed changes
+
