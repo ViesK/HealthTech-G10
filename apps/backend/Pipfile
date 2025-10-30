@@ -8,6 +8,7 @@ psycopg2-binary = "*"
 bcrypt = "==4.0.1"
 pyjwt = "*"
 passlib = {extras = ["bcrypt"], version = "*"}
+httpx = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 sqlalchemy = ">=2"

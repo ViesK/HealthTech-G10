@@ -31,7 +31,7 @@ class UserUpdate(BaseModel):
     phone: Optional[str] = Field(None, max_length=30, description="Teléfono")
     type: Optional[UserType] = Field(None, description="Tipo de usuario (paciente, medico, admin)")
     timezone: Optional[str] = Field(None, max_length=50, description="Zona horaria")
-
+    password: Optional[str] = Field(None,description="contraseña")
     model_config = ConfigDict(from_attributes=True)  
 
 class LoginSchema(BaseModel):
