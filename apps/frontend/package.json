@@ -15,7 +15,11 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "^2.9.0",
+        "axios": "^1.13.1",
+        "date-fns": "^4.1.0",
+        "lucide-react": "^0.548.0",
         "react": "^19.1.1",
+        "react-datepicker": "^8.7.0",
         "react-dom": "^19.1.1",
         "react-redux": "^9.2.0",
         "react-router-dom": "^7.9.3"
@@ -23,6 +27,7 @@
     "devDependencies": {
         "@eslint/js": "^9.36.0",
         "@tailwindcss/vite": "^4.1.14",
+        "@types/axios": "^0.9.36",
         "@types/node": "^24.6.0",
         "@types/react": "^19.1.16",
         "@types/react-dom": "^19.1.9",
@@ -39,4 +44,3 @@
         "vite": "^7.1.7"
     }
 }
-

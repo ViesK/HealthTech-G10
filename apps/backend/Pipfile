@@ -10,9 +10,11 @@ sqlalchemy = "*"
 psycopg2-binary = "*"
 pydantic = "*"
 python-dotenv = "*"
-passlib = {extras = ["bcrypt"], version = "*"}
-pyjwt = "*"
 psycopg = {extras = ["binary"], version = "*"}
+bcrypt = "==4.0.1"
+pyjwt = "*"
+passlib = {extras = ["bcrypt"], version = "*"}
+httpx = "*"
 
 [dev-packages]
 
