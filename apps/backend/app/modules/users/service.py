@@ -59,13 +59,19 @@ def create_user(db: Session, user_data: UserCreate) -> UsersModel:
 def update_user(db: Session, user_id: int, user_data: UserUpdate) -> Optional[UsersModel]:
     user = db.query(UsersModel).filter(UsersModel.id == user_id).first()
     if not user:
-        return None
-    for key, value in user_data.dict(exclude_unset=True).items():
-        setattr(user, key, value)
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+
+    # Actualizar campos opcionales
+    for field, value in user_data.model_dump(exclude_unset=True).items():
+        if field == "password" and value:
+            # Encriptar contraseña antes de guardar
+            user.password_hash = hash_password(value)
+        elif hasattr(user, field):
+            setattr(user, field, value)
+
     db.commit()
     db.refresh(user)
     return user
-    
 
 
 # DELETE: Eliminar a un usuario
@@ -78,14 +84,21 @@ def delete_user_by_id(user_id:int, db:Session) -> UsersModel:
     return False
 
 #Autenticar usuario
+
 def authenticate_user(user_id: int, password: str, db: Session) -> dict:
     user = db.query(UsersModel).filter(UsersModel.id == user_id).first()
+
+
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Usuario no encontrado"
         )
-    if not verify_password(password, user.password_hash):
+
+    # Verificar contraseña
+    coincide = verify_password(password, user.password_hash)
+    
+    if not coincide:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Contraseña incorrecta"

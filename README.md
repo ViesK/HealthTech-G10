@@ -4,7 +4,7 @@
 - Node.js 20+
 - Python 3.13.5 + Pipenv
 - PostgreSQL 16+ (con pgAdmin o psql)
-
+- httpx
 ## Primera vez (tras clonar)
 ```bash
 

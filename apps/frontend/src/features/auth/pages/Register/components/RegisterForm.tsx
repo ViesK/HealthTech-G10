@@ -1,7 +1,9 @@
 import { Button, DateInput, EmailInput, InputField, NumberInput, PasswordInput, SelectInput } from '@/shared/components';
 import { LOCALITY_OPTIONS } from '@/shared/constants';
 import { useState } from 'react';
+import axios from 'axios';
 
+const API_URL = "http://127.0.0.1:8000/api/users/register"; // 🔹 ajustá según tu ruta real
 const RegisterForm = () => {
     const [birthDate, setBirthDate] = useState('');
     const [locality, setLocality] = useState('');
