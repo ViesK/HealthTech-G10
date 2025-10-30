@@ -1,11 +1,12 @@
+from app.core.db import Base
+from app.modules.users.model import UsersModel
+from app.modules.clinic.model import ClinicModel
+
 from datetime import datetime
 from typing import List, Optional
 
 from sqlalchemy import Integer, String, Boolean, DateTime, Numeric, JSON, func, ForeignKey, CheckConstraint, UniqueConstraint
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-
-class Base(DeclarativeBase):
-    pass
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 class Appointment(Base):
     __tablename__ = "appointments"
@@ -19,7 +20,7 @@ class Appointment(Base):
     specialty_id: Mapped[int] = mapped_column(ForeignKey("specialties.id"), nullable=False)
     patient_user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     service_slot_id: Mapped[int] = mapped_column(ForeignKey("service_slots.id"), nullable=False)
-    clinic_id: Mapped[int] = mapped_column(ForeignKey("clinics.id"), nullable=False)
+    clinic_id: Mapped[int] = mapped_column(ForeignKey("clinic.id"), nullable=False)
 
     assigned_location_id: Mapped[Optional[int]] = mapped_column(ForeignKey("locations.id"))
     assigned_medic_id: Mapped[Optional[int]] = mapped_column(ForeignKey("users.id"))

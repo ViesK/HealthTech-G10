@@ -1,19 +1,35 @@
 <!doctype html>
 <html>
-  <body>
-    <h2>¡Cita confirmada!</h2>
-    <p><strong>Paciente:</strong> {{ patient_name }}</p>
-    <p><strong>Médico:</strong> {{ medic_name }}</p>
-    <p><strong>Clínica:</strong> {{ clinic_name }}</p>
-    <p><strong>Especialidad:</strong> {{ specialty }}</p>
-    <p><strong>Modalidad:</strong> {{ "Presencial" if modality=="IN_PERSON" else "Virtual" }}</p>
-    {% if modality == "IN_PERSON" and location %}
-      <p><strong>Ubicación:</strong> {{ location }}</p>
-    {% endif %}
-    <p><strong>Horario:</strong> {{ start_str }} — {{ end_str }}</p>
-    <p>
-      <a href="{{ manage_url }}">Ver cita</a>
-      {% if cancel_url %} · <a href="{{ cancel_url }}">Cancelar</a>{% endif %}
-    </p>
-  </body>
+    <body>
+        <h2>¡Cita confirmada!</h2>
+        <p><strong>Paciente:</strong> {{ patient_name }}</p>
+        <p><strong>Médico:</strong> {{ medic_name }}</p>
+        <p><strong>Clínica:</strong> {{ clinic_name }}</p>
+        <p><strong>Especialidad:</strong> {{ specialty }}</p>
+        <p><strong>Modalidad:</strong> {{ "Presencial" if modality=="IN_PERSON" else "Virtual" }}</p>
+
+        {% if modality == "IN_PERSON" and location %}
+        <p><strong>Ubicación:</strong> {{ location }}</p>
+        {% endif %}
+
+        <p><strong>Horario:</strong> {{ start_str }} — {{ end_str }}</p>
+
+        <p>
+            <a href="{{ manage_url }}">Ver cita</a>
+            {% if cancel_url %} · <a href="{{ cancel_url }}">Cancelar</a>{% endif %}
+        </p>
+
+        <p>
+            <a href="{{ gcal_link }}" target="_blank" rel="noopener noreferrer"
+                style="display:inline-block;padding:10px 14px;text-decoration:none;border-radius:8px;
+                        background:#1a73e8;color:#fff;font-weight:600">
+                ➕ Añadir a Google Calendar
+            </a>
+        </p>
+
+        {% if modality == "VIRTUAL" and meet_url %}
+            <p><strong>Acceso a la reunión:</strong> <a href="{{ meet_url }}">{{ meet_url }}</a></p>
+        {% endif %}
+        
+    </body>
 </html>

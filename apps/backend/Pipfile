@@ -4,16 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = "*"
-uvicorn = {extras = ["standard"], version = "*"}
-sqlalchemy = "*"
 psycopg2-binary = "*"
-pydantic = "*"
-python-dotenv = "*"
-psycopg = {extras = ["binary"], version = "*"}
 bcrypt = "==4.0.1"
 pyjwt = "*"
 passlib = {extras = ["bcrypt"], version = "*"}
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+sqlalchemy = ">=2"
+pydantic = ">=2"
+jinja2 = "*"
+python-dotenv = "*"
+email-validator = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [dev-packages]
 

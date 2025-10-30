@@ -16,3 +16,5 @@ from .modules import ROUTERS
 for r in ROUTERS:
     app.include_router(r, prefix=API_PREFIX)
 
+from dotenv import load_dotenv
+load_dotenv()
