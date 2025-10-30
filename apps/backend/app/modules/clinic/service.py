@@ -10,7 +10,7 @@ def get_all_clinics(db:Session) -> List[ClinicModel]:
     return db.query(ClinicModel).all()
 
 # GET: Traer una clinica por ID
-def get_clinic_by_id(db:Session,clinic_id:int) -> ClinicModel:
+def get_clinic_by_id(db: Session, clinic_id: int) -> Optional[ClinicModel]:
     return db.query(ClinicModel).filter(ClinicModel.id==clinic_id).first()
 
 # POST: Crear una clinica
@@ -33,7 +33,7 @@ def update_clinic(db:Session,clinic_id:int,clinic_data:ClinicUpdate) -> Optional
     return clinic
 
 # DELETE: Eliminar una clinica
-def delete_clinic(db:Session,clinic_id:int) ->ClinicModel:
+def delete_clinic(db: Session, clinic_id: int) -> bool:
     clinic = db.query(ClinicModel).filter(ClinicModel.id==clinic_id).first()
     if clinic:
         db.delete(clinic)

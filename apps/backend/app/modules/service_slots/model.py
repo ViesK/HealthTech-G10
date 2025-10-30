@@ -1,32 +1,27 @@
-from sqlalchemy import ForeignKey, Integer, Enum
-from sqlalchemy.dialects.postgresql import UUID, TIMESTAMP
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-import uuid
+from app.core.db import Base
 from datetime import datetime
-from enums import AvailabilityStatus  # si tenés los enums definidos aparte
-
-class Base(DeclarativeBase):
-    pass
+from sqlalchemy import Integer, String, DateTime, func, ForeignKey, CheckConstraint
+from sqlalchemy.orm import Mapped, mapped_column
 
 class ServiceSlot(Base):
     __tablename__ = "service_slots"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    __table_args__ = (
+        CheckConstraint("start_ts < end_ts", name="ck_slot_time_window"),
+        CheckConstraint("capacity >= 1", name="ck_slot_capacity_pos"),
     )
-    specialty_id: Mapped[UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("specialties.id"), nullable=False
-    )
-    clinic_id: Mapped[UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("clinics.id"), nullable=False
-    )
-    start_ts: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False)
-    end_ts: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False)
-    capacity: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
-    status: Mapped[AvailabilityStatus] = mapped_column(
-        Enum(AvailabilityStatus), nullable=False, default="OPEN"
-    )
-    held_until: Mapped[datetime | None] = mapped_column(TIMESTAMP(timezone=True))
 
-    clinic: Mapped["Clinic"] = relationship("clinics.models.Clinic", back_populates="service_slots")
-    specialty: Mapped["Specialty"] = relationship("specialties.models.Specialty", back_populates="service_slots")
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+
+    specialty_id: Mapped[int] = mapped_column(ForeignKey("specialties.id"), nullable=False)
+    clinic_id:    Mapped[int] = mapped_column(ForeignKey("clinics.id"), nullable=False)
+
+    start_ts: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    end_ts:   Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+    capacity: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    status:   Mapped[str] = mapped_column(String(16), nullable=False, server_default="OPEN")  # OPEN | HELD | BLOCKED
+    held_until: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+

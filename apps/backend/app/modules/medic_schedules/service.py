@@ -5,7 +5,7 @@ from .schema import MedicScheduleCreate, MedicScheduleUpdate
 
 # POST: Crear horario
 def create_schedule(db: Session, schedule_data: MedicScheduleCreate) -> Medic_SchedulesModel:
-    schedule = Medic_SchedulesModel(**schedule_data.dict())
+    schedule = Medic_SchedulesModel(**schedule_data.model_dump())
     db.add(schedule)
     db.commit()
     db.refresh(schedule)
@@ -20,8 +20,8 @@ def get_schedule_by_id(db: Session, schedule_id: int) -> Optional[Medic_Schedule
     return db.query(Medic_SchedulesModel).filter(Medic_SchedulesModel.id == schedule_id).first()
 
 # GET: Obtener horario por ID POR MEDICO
-def get_medic_schedule_by_id(db:Session,medic_id:int)-> Optional[Medic_SchedulesModel]:
-    return db.query(Medic_SchedulesModel).filter(Medic_SchedulesModel.medic_user_id==medic_id).all()
+def get_medic_schedule_by_id(db: Session, medic_id: int) -> List[Medic_SchedulesModel]:
+    return db.query(Medic_SchedulesModel).filter(Medic_SchedulesModel.medic_user_id == medic_id).all()
 
 # Actualizar horario
 def update_schedule(db: Session, schedule_id: int, update_data: MedicScheduleUpdate) -> Optional[Medic_SchedulesModel]:

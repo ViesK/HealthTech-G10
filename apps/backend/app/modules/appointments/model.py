@@ -1,7 +1,4 @@
 from app.core.db import Base
-from app.modules.users.model import UsersModel
-from app.modules.clinic.model import ClinicModel
-
 from datetime import datetime
 from typing import List, Optional
 

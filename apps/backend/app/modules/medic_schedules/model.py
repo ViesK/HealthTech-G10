@@ -11,7 +11,7 @@ class StatusType(enum.Enum):
 
 
 class Medic_SchedulesModel(Base):
-    __tablename__ = "medic_shedules"
+    __tablename__ = "medic_schedules"
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
 
     # Claves foráneas

@@ -1,18 +1,18 @@
 from pydantic import BaseModel, Field
-from uuid import UUID
 from typing import Optional
 
+
 class SpecialtyBase(BaseModel):
-    name: str = Field(..., min_length=2, max_length=120, description="Nombre de la especialidad")
+    name: str = Field(..., min_length=2, max_length=120)
+
 
 class SpecialtyCreate(SpecialtyBase):
     pass
 
-class SpecialtyUpdate(BaseModel):
-    name: Optional[str] = Field(None, min_length=2, max_length=120)
 
 class SpecialtyRead(SpecialtyBase):
-    id: UUID
+    id: int
 
-    class Config:
-        from_attributes = True
+
+class SpecialtyUpdate(BaseModel):
+    name: Optional[str] = Field(None, min_length=2, max_length=120)

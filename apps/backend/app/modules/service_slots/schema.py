@@ -1,28 +1,41 @@
-from pydantic import BaseModel
-from uuid import UUID
+from pydantic import BaseModel, Field, model_validator
+from typing import Optional, Literal
 from datetime import datetime
-from enum import Enum
 
-class AvailabilityStatus(str, Enum):
-    OPEN = "OPEN"
-    HELD = "HELD"
-    BLOCKED = "BLOCKED"
+SlotStatus = Literal["OPEN", "HELD", "BLOCKED"]
 
 class ServiceSlotBase(BaseModel):
-    specialty_id: UUID
-    clinic_id: UUID
-    location_id: UUID | None = None
+    specialty_id: int = Field(..., gt=0)
+    clinic_id: int = Field(..., gt=0)
+
     start_ts: datetime
     end_ts: datetime
-    capacity: int = 1
-    status: AvailabilityStatus = AvailabilityStatus.OPEN
-    held_until: datetime | None = None
+
+    capacity: int = Field(1, ge=1)
+    status: SlotStatus = "OPEN"
+    held_until: Optional[datetime] = None
+
+    @model_validator(mode="after")
+    def _check_time_window(self):
+        if self.end_ts <= self.start_ts:
+            raise ValueError("end_ts debe ser posterior a start_ts")
+        return self
 
 class ServiceSlotCreate(ServiceSlotBase):
     pass
 
 class ServiceSlotRead(ServiceSlotBase):
-    id: UUID
+    id: int
+    created_at: datetime
 
-    class Config:
-        orm_mode = True
+class ServiceSlotUpdate(BaseModel):
+    specialty_id: Optional[int] = Field(None, gt=0)
+    clinic_id: Optional[int] = Field(None, gt=0)
+
+    start_ts: Optional[datetime] = None
+    end_ts: Optional[datetime] = None
+
+    capacity: Optional[int] = Field(None, ge=1)
+    status: Optional[SlotStatus] = None
+    held_until: Optional[datetime] = None
+

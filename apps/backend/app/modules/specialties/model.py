@@ -1,28 +1,17 @@
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy import String
-import uuid
+from app.core.db import Base
+from datetime import datetime
+from sqlalchemy import String, DateTime, func, UniqueConstraint, Integer
+from sqlalchemy.orm import Mapped, mapped_column
 
-class Base(DeclarativeBase):
-    pass
 
 class Specialty(Base):
     __tablename__ = "specialties"
-
-    id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
-    name: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
-
-    # Relaciones
-    clinics: Mapped[list["ClinicSpecialty"]] = relationship(
-        "clinic_specialties.models.ClinicSpecialty", back_populates="specialty"
+    __table_args__ = (
+        UniqueConstraint("name", name="uq_specialties_name"),
     )
 
-    medics: Mapped[list["MedicSpecialty"]] = relationship(
-        "medic_specialties.models.MedicSpecialty", back_populates="specialty"
-    )
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(120), nullable=False)
 
-    service_slots: Mapped[list["ServiceSlot"]] = relationship(
-        "service_slots.models.ServiceSlot", back_populates="specialty"
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+

@@ -1,27 +1,14 @@
-from sqlalchemy import ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-
-class Base(DeclarativeBase):
-    pass
+from app.core.db import Base
+from sqlalchemy import Integer, ForeignKey, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column
 
 class ClinicSpecialty(Base):
     __tablename__ = "clinic_specialties"
-
-    clinic_id: Mapped[UUID] = mapped_column(
-        UUID(as_uuid=True),
-        ForeignKey("clinics.id"),
-        primary_key=True
-    )
-    specialty_id: Mapped[UUID] = mapped_column(
-        UUID(as_uuid=True),
-        ForeignKey("specialties.id"),
-        primary_key=True
+    __table_args__ = (
+        UniqueConstraint("clinic_id", "specialty_id", name="uq_clinic_specialty"),
     )
 
-    clinic: Mapped["Clinic"] = relationship(
-        "clinics.models.Clinic", back_populates="specialties"
-    )
-    specialty: Mapped["Specialty"] = relationship(
-        "specialties.models.Specialty", back_populates="clinics"
-    )
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+
+    clinic_id: Mapped[int] = mapped_column(ForeignKey("clinics.id"), nullable=False)
+    specialty_id: Mapped[int] = mapped_column(ForeignKey("specialties.id"), nullable=False)
